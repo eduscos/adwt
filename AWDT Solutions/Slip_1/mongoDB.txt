@@ -1,0 +1,26 @@
+show dbs;
+
+db.createCollection("owners");
+db.createCollection("properties");
+
+db.owners.insertMany([
+    { _id: 1, name: "Mr.Patil" },
+    { _id: 2, name: "Ms.Sharma" },
+    { _id: 3, name: "Mr.Khan" }
+]);
+
+db.properties.insertMany([
+    { area: "Pune", rate: 120000, owner_id: 1 },
+    { area: "Mumbai", rate: 250000, owner_id: 1 },
+    { area: "Nashik", rate: 180000, owner_id: 2 },
+    { area: "Nagpur", rate: 90000, owner_id: 3 }
+]);
+
+db.properties.find({}, { area: 1, rate: 1 });
+
+db.properties.find({ owner_id: 1, rate: { $gte: 150000 } });
+
+const ownerIdForNashik = db.properties.findOne({ area: "Nashik" }).owner_id;
+db.owners.find({ _id: ownerIdForNashik });
+
+db.properties.find({ rate: { $lt: 100000 } }, { area: 1, _id: 0 });

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Management</title>
+    <style>
+        
+        h1 {
+            font-size: 20pt;
+            text-decoration: underline;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .form {
+            width: 40%;
+            padding: 50px; 
+            color: red;
+            background-color: yellow;
+        }
+
+        input,label {
+            font-size: 15pt;
+        }
+
+        label {
+            margin-right: 100px;
+        }
+
+        input[type="submit"] {
+            text-align: center;
+            margin-left: 30%;
+            margin-right: 10%;
+            background-color: greenyellow;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        input[type="reset"] {
+            text-align: center;
+            background-color: lightskyblue;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+  
+    <form>
+        
+        <h1>Project Management</h1>
+
+        <div class="form">
+            
+            <label for="name">Project Name</label>
+            <input type="text" id="name" placeholder="Project Name">
+
+            <br><br>
+
+            <label for="assigned">Assigned to</label>
+            <select id="assigned">
+                <option>Er Merry Petision</option>
+                <option>Jonh Doe</option>
+                <option>Donalt Smith</option>
+            </select>
+
+            <br><br>
+
+            <label for="date">Start Date</label>
+            <input type="date" id="date">
+
+            <br><br>
+
+            <label for="e-date">End Date</label>
+            <input type="date" id="e-date">
+
+            <br><br>
+
+            <label for="pri">Priority</label>
+            <input type="radio" id="pri" name="ss">High
+            <input type="radio" id="pri"name="ss">Average
+            <input type="radio" id="pri" name="ss">Low
+
+            <br><br>
+
+            <label for="name">Description</label>
+            <textarea id="name" rows="5" cols="40"></textarea>
+
+            <br><br>
+
+            <input type="submit">
+            <input type="reset" value="clear">
+
+
+        </div>
+
+    </form>
+    
+</body>
+</html>

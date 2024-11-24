@@ -1,0 +1,53 @@
+// Hospitals collection
+db.hospitals.insertMany([
+    { _id: 1, name: "City Hospital", city: "Nashik", specialization: ["Pediatric", "Orthopedic"], rating: 4.5 },
+    { _id: 2, name: "Nashik Health Clinic", city: "Nashik", specialization: ["Gynaec", "Orthopedic"], rating: 3.8 },
+    { _id: 3, name: "Care Hospital", city: "Mumbai", specialization: ["Pediatric", "Cardiology"], rating: 4.1 },
+    { _id: 4, name: "Wellness Hospital", city: "Pune", specialization: ["Orthopedic"], rating: 4.0 },
+    { _id: 5, name: "Shree Hospital", city: "Nashik", specialization: ["Gynaec", "Pediatric"], rating: 3.9 },
+    { _id: 6, name: "LifeLine Hospital", city: "Nashik", specialization: ["Orthopedic", "Dermatology"], rating: 4.2 },
+    { _id: 7, name: "Sunshine Clinic", city: "Nashik", specialization: ["Cardiology", "Orthopedic"], rating: 3.7 },
+    { _id: 8, name: "Healing Hands", city: "Nashik", specialization: ["Gynaec"], rating: 4.3 },
+    { _id: 9, name: "Noble Hospital", city: "Pune", specialization: ["Orthopedic", "Pediatric"], rating: 3.6 },
+    { _id: 10, name: "Global Health Center", city: "Mumbai", specialization: ["Cardiology"], rating: 4.4 }
+]);
+
+// Doctors collection
+db.doctors.insertMany([
+    { _id: 1, name: "Dr. Deshmukh", hospitals: [1, 5, 6] },
+    { _id: 2, name: "Dr. Mehta", hospitals: [2, 7] },
+    { _id: 3, name: "Dr. Sharma", hospitals: [3, 8] },
+    { _id: 4, name: "Dr. Patil", hospitals: [4, 9] },
+    { _id: 5, name: "Dr. Singh", hospitals: [6, 10] }
+]);
+
+// Reviews collection
+db.reviews.insertMany([
+    { hospital_id: 1, reviewer: "Person A", comment: "Excellent service!", rating: 5 },
+    { hospital_id: 2, reviewer: "Person B", comment: "Very clean and professional", rating: 4 },
+    { hospital_id: 3, reviewer: "Person C", comment: "Good treatment.", rating: 3 },
+    { hospital_id: 4, reviewer: "Person D", comment: "Friendly staff", rating: 4 },
+    { hospital_id: 5, reviewer: "Person E", comment: "Quick response", rating: 5 },
+    { hospital_id: 6, reviewer: "Person F", comment: "Well-equipped", rating: 4 },
+    { hospital_id: 7, reviewer: "Person G", comment: "Affordable", rating: 3 },
+    { hospital_id: 8, reviewer: "Person H", comment: "Good experience", rating: 5 },
+    { hospital_id: 9, reviewer: "Person I", comment: "Comfortable atmosphere", rating: 3 },
+    { hospital_id: 10, reviewer: "Person J", comment: "Great doctors", rating: 4 }
+]);
+
+
+// Query a: List the names of hospitals with a specific specialization
+// Replace "Orthopedic" with the desired specialization
+db.hospitals.find({ specialization: "Orthopedic" }, { name: 1, _id: 0 });
+
+// Query b: List the names of all hospitals located in a specific city
+// Replace "Nashik" with the desired city
+db.hospitals.find({ city: "Nashik" }, { name: 1, _id: 0 });
+
+// Query c: List the names of hospitals where Dr. Deshmukh visits
+// Find Dr. Deshmukh's record to get his hospital IDs
+const doctor = db.doctors.findOne({ name: "Dr. Deshmukh" });
+db.hospitals.find({ _id: { $in: doctor.hospitals } }, { name: 1, _id: 0 });
+
+// Query d: List the names of hospitals with a rating of 4 or higher
+db.hospitals.find({ rating: { $gte: 4 } }, { name: 1, _id: 0 });

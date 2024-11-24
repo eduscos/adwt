@@ -1,0 +1,34 @@
+// Employees collection
+db.employees.insertMany([
+    { _id: 1, name: "Mr. Patil", project_id: 1 },
+    { _id: 2, name: "Ms. Sharma", project_id: 2 },
+    { _id: 3, name: "Mr. Khan", project_id: 3 },
+    { _id: 4, name: "Ms. Desai", project_id: 1 },
+    { _id: 5, name: "Mr. Roy", project_id: 2 }
+]);
+
+// Projects collection
+db.projects.insertMany([
+    { _id: 1, name: "Project Alpha", project_type: "Development", duration_months: 6 },
+    { _id: 2, name: "Project Beta", project_type: "Research", duration_months: 4 },
+    { _id: 3, name: "Project Gamma", project_type: "Development", duration_months: 2 },
+    { _id: 4, name: "Project Delta", project_type: "Maintenance", duration_months: 8 },
+    { _id: 5, name: "Project Epsilon", project_type: "Development", duration_months: 3 }
+]);
+
+
+// Query a: List all names of projects where Project_type is "Development"
+// Replace "Development" with the desired project type
+db.projects.find({ project_type: "Development" }, { name: 1, _id: 0 });
+
+// Query b: List all projects with duration greater than 3 months
+db.projects.find({ duration_months: { $gt: 3 } }, { name: 1, duration_months: 1, _id: 0 });
+
+// Query c: Count the number of employees working on a specific project
+// Replace "Project Alpha" with the desired project name
+const projectId = db.projects.findOne({ name: "Project Alpha" })._id;
+db.employees.find({ project_id: projectId }).count();
+
+// Query d: List the names of projects on which "Mr. Patil" is working
+const employee = db.employees.findOne({ name: "Mr. Patil" });
+db.projects.find({ _id: employee.project_id }, { name: 1, _id: 0 });

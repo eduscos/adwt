@@ -1,0 +1,39 @@
+db.createCollection("newspapers");
+db.createCollection("publishers");
+db.createCollection("cities");
+
+
+db.newspapers.insertMany([
+    { _id: 1, name: "Daily Nashik Times", language: "Marathi", publisher_id: 1, city_id: 1, sales: 5000 },
+    { _id: 2, name: "Mumbai Mirror", language: "English", publisher_id: 2, city_id: 2, sales: 10000 },
+    { _id: 3, name: "Pune Herald", language: "Marathi", publisher_id: 3, city_id: 3, sales: 7000 },
+    { _id: 4, name: "Gujarat Samachar", language: "Gujarati", publisher_id: 4, city_id: 4, sales: 12000 },
+    { _id: 5, name: "Times of Nashik", language: "Marathi", publisher_id: 1, city_id: 1, sales: 3000 }
+]);
+
+
+db.publishers.insertMany([
+    { _id: 1, name: "Nashik News Co.", state: "Maharashtra" },
+    { _id: 2, name: "Mumbai Media Ltd.", state: "Maharashtra" },
+    { _id: 3, name: "Pune Publishing House", state: "Maharashtra" },
+    { _id: 4, name: "Gujarat Publications", state: "Gujarat" },
+    { _id: 5, name: "Vadodara News Network", state: "Gujarat" }
+]);
+
+
+db.cities.insertMany([
+    { _id: 1, name: "Nashik", state: "Maharashtra" },
+    { _id: 2, name: "Mumbai", state: "Maharashtra" },
+    { _id: 3, name: "Pune", state: "Maharashtra" },
+    { _id: 4, name: "Ahmedabad", state: "Gujarat" },
+    { _id: 5, name: "Vadodara", state: "Gujarat" }
+]);
+
+// Query a: List all newspapers available in "Nashik" city
+db.newspapers.find({ city_id: 1 }, { name: 1, _id: 0 });
+
+// Query b: List all newspapers in the "Marathi" language
+db.newspapers.find({ language: "Marathi" }, { name: 1, _id: 0 });
+
+// Query c: Count the number of publishers in the "Gujarat" state
+db.publishers.countDocuments({ state: "Gujarat" });

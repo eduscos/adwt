@@ -1,0 +1,78 @@
+MongoDB 
+
+MongoDB is a NoSQL, document-oriented database that stores data in flexible, JSON-like documents, making it scalable, schema-less, and ideal for handling unstructured or semi-structured data.
+
+Database: A container for `collections` (Equivalent to a `database` in relational DB).
+Collection: A group of related documents (Equivalent to a `table` in relational DB).
+Document: A single record in JSON-like format (Equivalent to a `row` in relational DB).
+Field: A key-value pair in a document (Equivalent to a `column` in relational DB).
+_id: A unique identifier for each document (Equivalent to a `primary key` in relational DB).
+
+
+To run mongo db 
+
+open terminal and type       - >  `mongo`
+to show all databases         - >  `show dbs`
+to show current database   - >  `db`
+to switch to database (or create one if it doesn't exist)  - > `use <db_name>`
+
+to show all collections - >  `show collections`
+to create or switch to a collection - > `db.<collection_name>`
+to drop a collection    - >  `db.<collection_name>.drop()`
+
+to insert one document  - >  `db.<collection_name>.insertOne( { key: "value" } ) `
+to insert multiple documents   - >   `db.<collection_name>.insertMany( [ { key: "value1" }, { key: "value2" } ] ) `
+for ex : db.collection.insert({ name: "Alice", age: 25 });
+
+to find all documents - > `db.<collection_name>.find()`
+to pretty-print results     - > `db.<collection_name>.find().pretty()`
+to find documents with a condition  - > `db.<collection_name>.find( { key: "value" } )`
+
+to update one document  - > `db.<collection_name>.updateOne(  { key: "value" },
+                                                                                             { $set: { key: "new_value" }  } )
+
+to delete one document   - > `db.<collection_name>.deleteOne( { key: "value" } ) `
+
+to count the number of documents in a collection or matching a condition - > `db.collection.count({ age: { $gt: 18 } }); `
+
+to find & retrieve documents from a collection - > `db.collection.find({ age: 25 });`
+
+A query operator to find documents where a field's value is greater than a specified value - >
+   `db.collection.find({ age: { $gt: 18 } }); `
+
+A query operator to find documents where a field's value is less than a specified value - >
+   ` db.collection.find({ age: { $lt: 30 } }) ; `
+
+when you only want a specific number of results, like fetching the top 5 results - > ` db.collection.find().limit(5); `
+
+Orders the results of a query in ascending or descending order ->
+
+Ascending order (1) :   db.collection.find().sort({ age: 1 });
+Descending order (-1):  db.collection.find().sort({ age: -1 });
+
+
+You can use them together to fetch a specific number of sorted results   - > ` db.collection.find().sort({ age: 1 }).limit(5); `
+
+Why Use tojson?
+
+To format output neatly for better readability.
+To convert data into JSON format, which is widely used for data interchange.
+
+var result =  db.collection.findOne({ name: "Alice" });
+print(tojson(result));
+
+
+To iterate through documents in MongoDB:
+
+1. Using forEach() : This is the most common and simple way to iterate over documents in MongoDB.
+
+db.collection.find().forEach(   function(doc) {
+                                                   print(tojson(doc)); // Print each document as JSON
+                                             }  );
+
+2. Using hasNext() and next() : You can manually handle the cursor and iterate through each document.
+
+var cursor = db.collection.find();
+while (cursor.hasNext()) {
+    print(tojson(cursor.next()));
+}
